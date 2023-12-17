@@ -15,7 +15,7 @@ public class RealEstateConfiguration : IEntityTypeConfiguration<RealEstate>
         builder.Property(re => re.Id).HasColumnName("Id").IsRequired();
         builder.Property(re => re.Type).HasColumnName("Type");
         builder.Property(re => re.Status).HasColumnName("Status");
-        builder.Property(re => re.SquareMeters).HasColumnName("SquareMeters");
+        builder.Property(re => re.SquareMeters).HasColumnName("SquareMeters").HasColumnType("decimal(18,2)");
         builder.Property(re => re.Address).HasColumnName("Address");
         builder.Property(re => re.City).HasColumnName("City");
         builder.Property(re => re.District).HasColumnName("District");
