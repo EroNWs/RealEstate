@@ -1,6 +1,8 @@
 using Domain.Entities;
+using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace Persistence.EntityConfigurations;
 
@@ -17,12 +19,18 @@ public class RealEstateConfiguration : IEntityTypeConfiguration<RealEstate>
         builder.Property(re => re.Address).HasColumnName("Address");
         builder.Property(re => re.City).HasColumnName("City");
         builder.Property(re => re.District).HasColumnName("District");
-        builder.Property(re => re.TransactionId).HasColumnName("TransactionId");
         builder.Property(re => re.TransactionType).HasColumnName("TransactionType");
         builder.Property(re => re.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(re => re.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(re => re.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(re => !re.DeletedDate.HasValue);
+
+        builder.HasDiscriminator<string>("RealEstateType")
+                   .HasValue<RealEstate>("BaseType")
+                   .HasValue<RealEstatePropertyForBuilding>("Building")
+                   .HasValue<RealEstatePropertyForLand>("Land");
+
+
     }
 }

@@ -10,19 +10,27 @@ public class RealEstateTransactionForRentalConfiguration : IEntityTypeConfigurat
     {
         builder.ToTable("RealEstateTransactionForRentals").HasKey(retfr => retfr.Id);
 
-        builder.Property(retfr => retfr.Id).HasColumnName("Id").IsRequired();
-        builder.Property(retfr => retfr.RealEstateId).HasColumnName("RealEstateId");
-        builder.Property(retfr => retfr.RealEstate).HasColumnName("RealEstate");
-        builder.Property(retfr => retfr.EtateAgentId).HasColumnName("EtateAgentId");
-        builder.Property(retfr => retfr.EstateAgent).HasColumnName("EstateAgent");
-        builder.Property(retfr => retfr.TenantId).HasColumnName("TenantId");
-        builder.Property(retfr => retfr.Tenant).HasColumnName("Tenant");
-        builder.Property(retfr => retfr.RenterId).HasColumnName("RenterId");
-        builder.Property(retfr => retfr.Renter).HasColumnName("Renter");
         builder.Property(retfr => retfr.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(retfr => retfr.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(retfr => retfr.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(retfr => !retfr.DeletedDate.HasValue);
+        builder.HasOne(r => r.Tenant)
+              .WithMany(c => c.Tenancies)
+              .HasForeignKey(r => r.TenantId)
+              .OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(r => r.Renter)
+              .WithMany(c => c.Rentings)
+              .HasForeignKey(r => r.RenterId)
+              .OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(r => r.EstateAgent)
+              .WithMany(ea => ea.RealEstateTransactionForRentals)
+              .HasForeignKey(r => r.EtateAgentId)
+              .OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(t => t.RealEstate)
+              .WithOne()
+              .HasForeignKey<RealEstateTransactionForRental>(t => t.RealEstateId)
+              .OnDelete(DeleteBehavior.Restrict);
+
     }
 }

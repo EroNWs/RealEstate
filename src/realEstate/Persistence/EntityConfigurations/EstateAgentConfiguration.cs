@@ -28,5 +28,23 @@ public class EstateAgentConfiguration : IEntityTypeConfiguration<EstateAgent>
         builder.Property(ea => ea.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasQueryFilter(ea => !ea.DeletedDate.HasValue);
+
+        builder.HasMany(ea => ea.Customers)
+        .WithOne(c => c.EstateAgent)
+        .HasForeignKey(c => c.EstateAgentId);
+
+        builder.HasMany(ea => ea.RealEstateTransactionForRentals)
+              .WithOne(r => r.EstateAgent)
+              .HasForeignKey(r => r.EtateAgentId)
+              .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasMany(ea => ea.RealEstateTransactionForSales)
+              .WithOne(s => s.EstateAgent)
+              .HasForeignKey(s => s.EstateAgentId)
+              .OnDelete(DeleteBehavior.Restrict);
+
+
+
+
     }
 }
