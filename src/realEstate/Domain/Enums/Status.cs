@@ -5,5 +5,4 @@ public enum Status
     Rental = 2,
     DailyRental = 3
 
-
 }

@@ -11,7 +11,10 @@ public static class PersistenceServiceRegistration
 {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("BaseDb")));
+        services.AddDbContext<BaseDbContext>(options => options
+        .UseSqlServer(configuration
+        .GetConnectionString("BaseDb")));
+
         services.AddScoped<IEmailAuthenticatorRepository, EmailAuthenticatorRepository>();
         services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
         services.AddScoped<IOtpAuthenticatorRepository, OtpAuthenticatorRepository>();
@@ -24,6 +27,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IRealEstateRepository, RealEstateRepository>();
         services.AddScoped<IRealEstateTransactionForRentalRepository, RealEstateTransactionForRentalRepository>();
         services.AddScoped<IRealEstateTransactionForSaleRepository, RealEstateTransactionForSaleRepository>();
+
         return services;
     }
 }

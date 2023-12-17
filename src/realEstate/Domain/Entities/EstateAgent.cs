@@ -27,9 +27,10 @@ public class EstateAgent : Entity<Guid>
 
     public byte EmployeeCount { get; set; }
 
-    public ICollection<Customer> Customers { get; set; }
+    public virtual ICollection<Customer> Customers { get; set; }
 
-    public ICollection<RealEstateTransactionForSale> RealEstateTransactionForSales { get; set; }
+    public virtual ICollection<RealEstateTransactionForSale> RealEstateTransactionForSales { get; set; }
 
-    public ICollection<RealEstateTransactionForRental> RealEstateTransactionForRentals { get; set; }
+    public virtual ICollection<RealEstateTransactionForRental> RealEstateTransactionForRentals { get; set; }
+
 }

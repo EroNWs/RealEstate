@@ -20,5 +20,4 @@ public class RealEstateTransactionForSale : Entity<Guid>
     public Customer Seller { get; set; }
 
 
-
 }

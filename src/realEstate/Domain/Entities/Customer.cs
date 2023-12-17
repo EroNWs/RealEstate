@@ -51,13 +51,13 @@ public class Customer : Entity<Guid>
 
     public EstateAgent EstateAgent { get; set; }
 
-    public ICollection<RealEstateTransactionForSale> Purchases { get; set; }
+    public virtual ICollection<RealEstateTransactionForSale> Purchases { get; set; }
 
-    public ICollection<RealEstateTransactionForSale> Sales { get; set; }
+    public virtual ICollection<RealEstateTransactionForSale> Sales { get; set; }
 
-    public ICollection<RealEstateTransactionForRental> Rentings { get; set; }
+    public virtual ICollection<RealEstateTransactionForRental> Rentings { get; set; }
 
-    public ICollection<RealEstateTransactionForRental> Tenancies { get; set; }
+    public virtual ICollection<RealEstateTransactionForRental> Tenancies { get; set; }
 
 
 }

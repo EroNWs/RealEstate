@@ -8,7 +8,9 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)
     {
-        builder.ToTable("Customers").HasKey(c => c.Id);
+        builder.ToTable("Customers")
+            .HasKey(c => c.Id);
+
 
         builder.Property(c => c.Id)
             .HasColumnName("Id")
@@ -16,36 +18,90 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 
         builder.Property(c => c.CustomerName)
             .HasColumnName("CustomerName")
-            .HasMaxLength(30);
+            .HasMaxLength(27);
 
         builder.Property(c => c.CustomerSurName)
             .HasColumnName("CustomerSurName")
+            .HasMaxLength(27);
+
+        builder.Property(c => c.CustomerSecondSurname)
+            .HasColumnName("CustomerSecondSurname")
+            .HasMaxLength(27);
+
+        builder.Property(c => c.CustomerSecondName)
+            .HasColumnName("CustomerSecondName")
+            .HasMaxLength(27);
+
+        builder.Property(c => c.BirthDate)
+            .HasColumnName("BirthDate");
+
+        builder.Property(c => c.Gender)
+            .HasColumnName("Gender");
+
+        builder.Property(c => c.Occupatipon)
+            .HasColumnName("Occupatipon");
+
+        builder.Property(c => c.MaritalStatus)
+            .HasColumnName("MaritalStatus");
+
+        builder.Property(c => c.HomePhone)
+            .HasColumnName("HomePhone")
+            .HasMaxLength(11);
+
+        builder.Property(c => c.MobilePhone)
+            .HasColumnName("MobilePhone")
+            .HasMaxLength(11);
+
+        builder.Property(c => c.NumberOfChildren)
+            .HasColumnName("NumberOfChildren");
+
+        builder.Property(c => c.Email)
+            .HasColumnName("Email")
             .HasMaxLength(30);
 
-        builder.Property(c => c.CustomerSecondSurname).HasColumnName("CustomerSecondSurname").HasMaxLength(30);
-        builder.Property(c => c.CustomerSecondName).HasColumnName("CustomerSecondName").HasMaxLength(30);
-        builder.Property(c => c.BirthDate).HasColumnName("BirthDate");
-        builder.Property(c => c.Gender).HasColumnName("Gender");
-        builder.Property(c => c.Occupatipon).HasColumnName("Occupatipon");
-        builder.Property(c => c.MaritalStatus).HasColumnName("MaritalStatus");
-        builder.Property(c => c.HomePhone).HasColumnName("HomePhone").HasMaxLength(11);
-        builder.Property(c => c.MobilePhone).HasColumnName("MobilePhone").HasMaxLength(11);
-        builder.Property(c => c.NumberOfChildren).HasColumnName("NumberOfChildren");
-        builder.Property(c => c.Email).HasColumnName("Email").HasMaxLength(40);
-        builder.Property(c => c.SpouseOccupation).HasColumnName("SpouseOccupation");
-        builder.Property(c => c.SpouseBirthDate).HasColumnName("SpouseBirthDate");
-        builder.Property(c => c.IsBuyerCustomer).HasColumnName("IsBuyerCustomer");
-        builder.Property(c => c.IsSellerCustomer).HasColumnName("IsSellerCustomer");
-        builder.Property(c => c.IsTenantCustomer).HasColumnName("IsTenantCustomer");
-        builder.Property(c => c.IsRenterCustomer).HasColumnName("IsRenterCustomer");
-        builder.Property(c => c.Address).HasColumnName("Address");
-        builder.Property(c => c.City).HasColumnName("City");
-        builder.Property(c => c.District).HasColumnName("District");   
-        builder.Property(c => c.CreatedDate).HasColumnName("CreatedDate").IsRequired();
-        builder.Property(c => c.UpdatedDate).HasColumnName("UpdatedDate");
-        builder.Property(c => c.DeletedDate).HasColumnName("DeletedDate");
+        builder.Property(c => c.SpouseOccupation)
+            .HasColumnName("SpouseOccupation");
+
+        builder.Property(c => c.SpouseBirthDate)
+            .HasColumnName("SpouseBirthDate");
+
+        builder.Property(c => c.IsBuyerCustomer)
+            .HasColumnName("IsBuyerCustomer");
+
+        builder.Property(c => c.IsSellerCustomer)
+            .HasColumnName("IsSellerCustomer");
+
+        builder.Property(c => c.IsTenantCustomer)
+            .HasColumnName("IsTenantCustomer");
+
+        builder.Property(c => c.IsRenterCustomer)
+            .HasColumnName("IsRenterCustomer");
+
+        builder.Property(c => c.Address)
+            .HasColumnName("Address")
+            .HasMaxLength(100);
+
+        builder.Property(c => c.City)
+            .HasColumnName("City")
+            .HasMaxLength(30);
+
+        builder.Property(c => c.District)
+            .HasColumnName("District")
+            .HasMaxLength(30);
+
+        builder.Property(c => c.CreatedDate)
+            .HasColumnName("CreatedDate")
+            .IsRequired();
+
+        builder.Property(c => c.UpdatedDate)
+            .HasColumnName("UpdatedDate");
+
+        builder.Property(c => c.DeletedDate)
+            .HasColumnName("DeletedDate");
+
 
         builder.HasQueryFilter(c => !c.DeletedDate.HasValue);
+
 
         builder.HasOne(c => c.EstateAgent)
             .WithMany(c => c.Customers)
@@ -70,7 +126,6 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
               .WithOne(s => s.Seller)
               .HasForeignKey(s => s.SellerId)
               .OnDelete(DeleteBehavior.Restrict);
-
 
     }
 }

@@ -11,5 +11,4 @@ public enum ZoningStatus
     ParkArea = 8,
     SocialFacility = 9,
 
-
 }
