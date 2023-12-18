@@ -2,7 +2,7 @@
 using Domain.Enums;
 
 namespace Domain.Entities;
-public class RealEstate : Entity<Guid>
+public abstract class RealEstate : Entity<Guid>
 {
     public RealEstateType Type { get; set; }
 

@@ -3,6 +3,7 @@ using Application.Services.Repositories;
 using Core.Persistence.Paging;
 using Core.Security.Entities;
 using Microsoft.EntityFrameworkCore.Query;
+using Nest;
 using System.Linq.Expressions;
 
 namespace Application.Services.UsersService;
@@ -59,7 +60,6 @@ public class UserManager : IUserService
         await _userBusinessRules.UserEmailShouldNotExistsWhenInsert(user.Email);
 
         User addedUser = await _userRepository.AddAsync(user);
-
         return addedUser;
     }
 
